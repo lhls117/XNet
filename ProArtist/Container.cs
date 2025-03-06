@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ProArtist.Extensions;
 using ProArtist.Presentation.Theme.Views;
 using ProArtist.Presentation.Views;
 using System;
@@ -39,8 +40,10 @@ namespace ProArtist
         private void ConfigureServices()
         {
             var service = new ServiceCollection();
-
+            service.AddAutoMapper();
             Services = service.BuildServiceProvider();
+
+            
         }
 
     }

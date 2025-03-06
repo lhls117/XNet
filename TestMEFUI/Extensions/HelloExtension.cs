@@ -16,6 +16,9 @@ namespace TestMEFUI.Extensions
         public HelloExtension(ExportFactory<HellowViewModel> viewModelFactory) : base(viewModelFactory)
         {
             Name = "Hello";
+
+            ImageKey = "HomeAnalytics";
+
         }
     }
 }

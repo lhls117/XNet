@@ -24,6 +24,7 @@ namespace ProArtist.Domain
         public int FontSize { get; set; }
         public string FontFamily { get; set; }
         public bool IsBold { get; set; }
-      
+        public Guid Id { get; set; }
+        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

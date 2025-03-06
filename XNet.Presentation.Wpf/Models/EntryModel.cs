@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XNet.Presentation.Wpf
+namespace XNet.Presentation.Wpf.Models
 {
     public class EntryModel : Model
     {
@@ -44,5 +44,7 @@ namespace XNet.Presentation.Wpf
             get => _isChecked;
             set => SetProperty(ref _isChecked, value);
         }
+
+
     }
 }

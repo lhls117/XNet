@@ -11,6 +11,7 @@ namespace XNet.Presentation.Wpf
     {
         private Container()
         {
+
         }
 
         public static Container Default { get; } = new Container();

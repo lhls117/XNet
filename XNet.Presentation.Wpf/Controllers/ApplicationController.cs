@@ -4,7 +4,9 @@ using System.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XNet.Presentation.Wpf.Services;
 using XNet.Presentation.Wpf.ViewModels;
+using XNet.Presentation.Wpf.Views;
 
 namespace XNet.Presentation.Wpf.Controllers
 {
@@ -18,13 +20,16 @@ namespace XNet.Presentation.Wpf.Controllers
     {
         private readonly Lazy<MainViewModel> _mainViewModel;
         private readonly Lazy<ShellViewModel> _shellViewModel;
+        private readonly IShellService shellService;
+        
 
         [ImportingConstructor]
-        public ApplicationController(Lazy<ShellViewModel> shellViewModel,Lazy<MainViewModel> mainViewModel )
+        public ApplicationController(Lazy<ShellViewModel> shellViewModel,Lazy<MainViewModel> mainViewModel,IShellService shellService)
         {
 
             _shellViewModel = shellViewModel;
             _mainViewModel = mainViewModel;
+            this.shellService = shellService;
 
         }
 
@@ -39,6 +44,9 @@ namespace XNet.Presentation.Wpf.Controllers
 
         public void Run()
         {
+            ((ShellService)shellService).ShellView = ShellViewModel.View;
+            ((ShellService)shellService).DialogHost = (ShellViewModel.View as IShellView)?.DialogHost;
+
             ShellViewModel.ContentView = MainViewModel.View;
             ShellViewModel.Show();
         }

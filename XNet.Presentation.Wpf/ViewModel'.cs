@@ -9,9 +9,9 @@ using System.Windows.Threading;
 namespace XNet.Presentation.Wpf
 {
     /// <summary>
-    ///     Abstract base class for a generic ViewModel implementation.
+    /// 泛型的ViewModel
     /// </summary>
-    /// <typeparam name="TView">The type of the view. Do provide an interface as type and not the concrete type itself.</typeparam>
+    /// <typeparam name="TView"></typeparam>
     public abstract class ViewModel<TView> : ViewModel where TView : class, IView
     {
         /// <summary>

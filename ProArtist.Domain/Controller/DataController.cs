@@ -28,6 +28,7 @@ namespace ProArtist.Domain
         public bool IsBold { get; set; }
 
         public DataSourceType DataSource { get; set; }
-      
+        public Guid Id { get; set; }
+        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

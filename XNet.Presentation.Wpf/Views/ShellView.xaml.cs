@@ -25,5 +25,7 @@ namespace XNet.Presentation.Wpf.Views
         {
             InitializeComponent();
         }
+
+        object IShellView.DialogHost => DialogHost;
     }
 }

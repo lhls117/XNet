@@ -20,13 +20,11 @@ namespace ProArtist.Presentation.Theme.ViewModels
            
         }
 
-        private TextDtoModel controller;
-        public TextDtoModel Controller
+        private TextModel controller;
+        public TextModel Controller
         {
             get => controller;
             set=>SetProperty(ref controller, value);
         }
-
-
     }
 }

@@ -3,6 +3,9 @@ using System.Data;
 using System.Windows;
 using XNet.Presentation.Wpf.Controllers;
 using XNet.Presentation.Wpf;
+using AutoMapper;
+
+using System.Reflection;
 
 namespace ProArtist
 {
@@ -22,6 +25,25 @@ namespace ProArtist
         {
             base.OnStartup(e);
 
+            var config = new MapperConfiguration(cfg =>
+            {
+                var allTypes = AppDomain.CurrentDomain.GetAssemblies()
+                  .Where(a => a.GetName().Name != nameof(AutoMapper))
+                  .SelectMany(a => a.DefinedTypes)
+                  .ToArray();
+
+                var profiles = allTypes
+                    .Where(t => typeof(Profile).GetTypeInfo().IsAssignableFrom(t) && !t.IsAbstract);
+
+                 foreach (var profile in profiles.Select(t=>t.AsType()))
+                {
+                    cfg.AddProfile(profile);
+                }
+
+                //cfg.AddProfile<MapperProfile>();
+            });
+
+           
             XNet.Presentation.Wpf.Container.Default.Services = Container.Default.Services;
             using (var container = Container.Default.Composition.CreateContainer())
             {

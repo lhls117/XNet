@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XNet.Presentation.Wpf.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
+   
     <DockPanel>
-        <ContentPresenter Content="{Binding ContentView}" />
+
+        <materialDesign:DialogHost x:Name="DialogHost" Identifier="materialDesign">
+            <ContentPresenter Content="{Binding ContentView}" />
+        </materialDesign:DialogHost>
+
     </DockPanel>
+    
 </Window>

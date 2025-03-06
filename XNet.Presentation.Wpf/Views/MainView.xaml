@@ -4,36 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:XNet.Presentation.Wpf.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" Background="AliceBlue">
-            <TextBlock Text="ProArtist" DockPanel.Dock="Top" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" Margin="0 30"/>
-            <ListBox
-              
-                x:Name="EntryListBox"
-                ItemsSource="{Binding EntryModels}"
-                SelectedIndex="0" SelectionChanged="EntryListBox_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate DataType="EntryModel">
-                        <Grid Margin="10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding ImageKey}"/>
-                            <TextBlock Text="{Binding Name}" Grid.Column="1" />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </DockPanel>
-        <DockPanel Grid.Column="1">
-            <ContentPresenter x:Name="contentPanel" Content="{Binding ElementName=EntryListBox, Path=SelectedItem.View}" />
-        </DockPanel>
-    </Grid>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--  Material Design  -->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+ 
+        <materialDesign:DrawerHost x:Name="DrawerHost" IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" >
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="212" Background="White">
+                    <ListBox x:Name="EntryListBox" Margin="0 16 0 16" SelectedIndex="0" ItemsSource="{Binding EntryModels}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="p:EntryModel">
+                                <StackPanel  Orientation="Horizontal">
+                                    <Border  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="{Binding ImageKey}" />
+                                    </Border>
+                                    <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
+            <DockPanel>
+                <materialDesign:ColorZone Padding="4"  materialDesign:ElevationAssist.Elevation="Dp4" Mode="PrimaryDark"  DockPanel.Dock="Top">
+                    <DockPanel>
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False" Height="24" x:Name="MenuToggleButton"/>
+                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Height="24">
+                            <ItemsControl ItemsSource="{Binding MenuitemModels}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{Binding Name}" Command="{Binding Command}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </materialDesign:PopupBox>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Text="{Binding  ElementName=EntryListBox, Path=SelectedItem.Name}"/>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+                <ContentPresenter Content="{Binding ElementName=EntryListBox, Path=SelectedItem.View}"/>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+
+
+   
 </UserControl>

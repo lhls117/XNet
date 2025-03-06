@@ -10,6 +10,6 @@ namespace ProArtist.Presentation.Theme.Views
 {
     public interface ITextControllerView:IView
     {
-       
+     
     }
 }

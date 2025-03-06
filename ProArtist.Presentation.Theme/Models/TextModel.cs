@@ -9,21 +9,31 @@ using XNet.Presentation;
 
 namespace ProArtist.Presentation.Theme.Models
 {
-    public class TextDtoModel:Model,IController
+    public class TextModel:Model,IController
     {
-        public TextDtoModel()
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public TextModel()
         {
             Type = ControllerType.Text;
             Des = "请输入内容";
+            Id = Guid.NewGuid();
+            this.PropertyChanged += TextModel_PropertyChanged;
+        
         }
 
-        public int index;
+        private void TextModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            
+        }
+
+        private int index;
         public int Index
         {
             get => index;
             set=>SetProperty(ref index, value);
         }
-        public string des;
+        private string des;
         public string Des
         {
             get => des;
@@ -73,11 +83,12 @@ namespace ProArtist.Presentation.Theme.Models
             set => SetProperty(ref fontFamily, value);
         }
 
-        public bool isBold;
+        private bool isBold;
         public bool IsBold
         {
             get => isBold;
             set => SetProperty(ref isBold, value);
         }
+       
     }
 }

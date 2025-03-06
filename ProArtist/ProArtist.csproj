@@ -9,13 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\home.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\home.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,8 +17,13 @@
     <ProjectReference Include="..\ProArtist.Presentation.Theme\ProArtist.Presentation.Theme.csproj" />
     <ProjectReference Include="..\ProArtist.Presentation\ProArtist.Presentation.csproj" />
     <ProjectReference Include="..\XNet.Foundation\XNet.Foundation.csproj" />
+    <ProjectReference Include="..\XNet.Infrastructure.AutoMapper\XNet.Infrastructure.AutoMapper.csproj" />
     <ProjectReference Include="..\XNet.Presentation.Wpf\XNet.Presentation.Wpf.csproj" />
     <ProjectReference Include="..\XNet.Presentation\XNet.Presentation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

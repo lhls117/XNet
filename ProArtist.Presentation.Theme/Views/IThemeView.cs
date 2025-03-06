@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,5 +15,11 @@ namespace ProArtist.Presentation.Theme.Views
         // DrawingControl DrawingControl { get; set; }
 
         Canvas Canvas { get;  }
+
+        event Action<System.Windows. Point> PointChanged;
+
+        event Action<double> FontSizeChanged;
+
+
     }
 }

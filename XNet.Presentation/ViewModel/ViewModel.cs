@@ -5,22 +5,13 @@ using System.Text;
 namespace XNet.Presentation
 {
     /// <summary>
-    ///     Abstract base class for a ViewModel implementation with a simple approach to set the DataContext.
+    /// 抽象的ViewModel，ViewModel包含了View
     /// </summary>
     public abstract class ViewModel : Model
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ViewModel" /> class and attaches itself as DataContext to the
-        ///     view.
-        /// </summary>
-        /// <param name="view">The view.</param>
-        protected ViewModel(IView view) : this(view, true) { }
+        #region ctor
 
-        /// <summary>
-        /// Initializes a new instance and attaches itself as DataContext to the view.
-        /// </summary>
-        /// <param name="view">The view.</param>
-        /// <param name="initializeDataContext">If set to true then the DataContext of the view is set within this constructor call. Default is true.</param>
+        protected ViewModel(IView view) : this(view, true) { }
         protected ViewModel(IView view, bool initializeDataContext)
         {
             View = view ?? throw new ArgumentNullException(nameof(view));
@@ -30,9 +21,14 @@ namespace XNet.Presentation
             }
         }
 
+       
+
+        #endregion
+
         /// <summary>
-        ///     Gets the associated view.
+        /// ViewModel包含的View视图
         /// </summary>
+
         public IView View { get; }
     }
 }

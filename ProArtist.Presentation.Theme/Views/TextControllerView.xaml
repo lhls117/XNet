@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProArtist.Presentation.Theme.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="100">
-
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style TargetType="TextBox">
             <Setter Property="MinWidth" Value="100"/>
@@ -20,7 +19,7 @@
         </StackPanel.Resources>
         <StackPanel Orientation="Horizontal" >
             <TextBlock Text="X坐标"/>
-            <TextBox Text="{Binding Controller.X}" />
+            <TextBox Text="{Binding Controller.X}"  />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Y坐标"/>
@@ -28,16 +27,16 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="文本"/>
-            <TextBox Text="{Binding Controller.Text,UpdateSourceTrigger=PropertyChanged}"  />
+            <TextBox Text="{Binding Controller.Text}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="字号"/>
-            <TextBox Text="{Binding Controller.FontSize}"/>
+            <TextBox Text="{Binding Controller.FontSize,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="字体"/>
             <TextBox Text="{Binding Controller.FontSize}" />
         </StackPanel>
-        
+
     </StackPanel>
 </UserControl>

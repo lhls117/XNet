@@ -19,6 +19,7 @@ using ProArtist.Presentation.Theme.Helps;
 using XNet.Controls;
 using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ProArtist.Presentation.Theme.ViewModels
 {
@@ -33,9 +34,53 @@ namespace ProArtist.Presentation.Theme.ViewModels
             AddControllerCmd = new DelegateCommand(AddController);
             this.textFactory = textFactory;
 
-            Bitmap bitmap = new Bitmap("科技数据化主题.png");
-            Image = BitmapHelper.ConvertToBitmapImage(bitmap);
+            //Bitmap bitmap = new Bitmap("科技数据化主题.png");
+            //Image = BitmapHelper.ConvertToBitmapImage(bitmap);
             //drawingControl.DrawingCanvas.TextBlockEvent += DrawingCanvas_TextBlockEvent;
+            this.View.PointChanged += View_PointChanged;
+            this.View.FontSizeChanged += View_FontSizeChanged;
+
+        }
+
+        private void View_FontSizeChanged(double obj)
+        {
+            switch (selectedController.Type)
+            {
+                case ControllerType.Image:
+                    break;
+                case ControllerType.Text:
+                    ((TextControllerViewModel)this.selectContent).Controller.FontSize = (int)obj;
+                    break;
+                case ControllerType.Data:
+                    break;
+                case ControllerType.StatusBar:
+                    break;
+                case ControllerType.ArcBar:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void View_PointChanged(System.Windows.Point obj)
+        {
+            switch (selectedController.Type)
+            {
+                case ControllerType.Image:
+                    break;
+                case ControllerType.Text:
+                    ((TextControllerViewModel)this.selectContent).Controller.X =(int) obj.X;
+                    ((TextControllerViewModel)this.selectContent).Controller.Y = (int)obj.Y;
+                    break;
+                case ControllerType.Data:
+                    break;
+                case ControllerType.StatusBar:
+                    break;
+                case ControllerType.ArcBar:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void DrawingCanvas_TextBlockEvent(int arg1, int arg2)
@@ -82,7 +127,7 @@ namespace ProArtist.Presentation.Theme.ViewModels
                 {
                     case ControllerType.Text:
                         var viewmodel= textFactory.CreateExport().Value;
-                        viewmodel.Controller = (TextDtoModel)value;
+                        viewmodel.Controller = (TextModel)value;
                         this.SelectContent = viewmodel;
                         
                         break;
@@ -117,16 +162,24 @@ namespace ProArtist.Presentation.Theme.ViewModels
             ControllerType controllerType = (ControllerType)selectedType;
             switch (controllerType)
             {
-                case ControllerType.Image:
-                    break;
+               
                 case ControllerType.Text:
-
-                    TextDtoModel text = new TextDtoModel();
+                    TextModel text = new TextModel();
+                    text.Index = CreatControllerHelp.CreatControllerIndex(controllers.ToList());
+                    text.Name = controllerType.ToString() + text.Index;
                     Controllers.Add(text);
-                    break;
-                case ControllerType.Data:
-                    DataController data = new DataController();
-                    Controllers.Add(data);
+                    TextBlock element = new TextBlock
+                    {
+                       
+                        Text = "text",
+                        FontSize = 20,
+                        Foreground = new SolidColorBrush(Colors.Red),
+                        Name =text.Name,
+                    };
+                    Panel.SetZIndex(element, 1);
+                    Canvas.SetLeft(element, 200);
+                    Canvas.SetTop(element, 200);
+                    this.View.Canvas.Children.Add(element);
                     break;
             }
 
@@ -135,16 +188,16 @@ namespace ProArtist.Presentation.Theme.ViewModels
 
             //drawingControl.DrawingCanvas.Cursor= Cursors.Arrow;
 
-            TextBlock element = new TextBlock
-            {
-                Text = "text",
-                FontSize = 10,
-                Foreground = new SolidColorBrush(Colors.Red),
-            };
-            Panel.SetZIndex(element, 1);
-            Canvas.SetLeft(element, 200);
-            Canvas.SetTop(element, 200);
-            this.View.Canvas.Children.Add(element);
+            //TextBlock element = new TextBlock
+            //{
+            //    Text = "text",
+            //    FontSize = 10,
+            //    Foreground = new SolidColorBrush(Colors.Red),
+            //};
+            //Panel.SetZIndex(element, 1);
+            //Canvas.SetLeft(element, 200);
+            //Canvas.SetTop(element, 200);
+            //this.View.Canvas.Children.Add(element);
         }
 
         #region functions
@@ -158,6 +211,8 @@ namespace ProArtist.Presentation.Theme.ViewModels
                types.Add(des);
             }
         }
+
+
         #endregion
     }
 }

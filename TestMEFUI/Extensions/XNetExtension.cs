@@ -17,6 +17,7 @@ namespace TestMEFUI.Extensions
         public XNetExtension(ExportFactory<XNetViewModel> viewModelFactory) : base(viewModelFactory)
         {
             Name = "XNet";
+            ImageKey = "ShieldAccount";
         }
     }
 }

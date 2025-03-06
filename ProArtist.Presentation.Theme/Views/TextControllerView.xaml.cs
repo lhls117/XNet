@@ -27,6 +27,8 @@ namespace ProArtist.Presentation.Theme.Views
             InitializeComponent();
         }
 
-       
+      
+
+    
     }
 }

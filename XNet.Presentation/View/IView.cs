@@ -4,11 +4,14 @@ using System.Text;
 
 namespace XNet.Presentation
 {
+    /// <summary>
+    /// View视图接口
+    /// </summary>
     public interface IView
     {
-        /// <summary>
-        /// Gets or sets the data context of the view.
-        /// </summary>
+         /// <summary>
+         /// View对应的上下文
+         /// </summary>
         object DataContext { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace XNet.Presentation.Wpf
 {
 
     /// <summary>
-    ///     视图模型扩展。
+    /// 视图模型扩展。
     /// </summary>
     public abstract class ModelExtension<TViewModel> : IModelExtension where TViewModel : ViewModel
     {
@@ -54,7 +54,7 @@ namespace XNet.Presentation.Wpf
 
         public virtual string Name { get; protected set; }
 
-        /// <inheritdoc />
+       
         public string Operation { get; protected set; }
 
         #endregion
